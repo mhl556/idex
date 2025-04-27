@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>获取提交日期示例</title>
+</head>
+<body>
+    <button id="fetchCommitDatesBtn">获取提交日期</button>
+    <div id="commitDates"></div>
+
+    <script>
+        document.getElementById('fetchCommitDatesBtn').addEventListener('click', function() {
+            fetchAllCommitDates('mhl556', 'idex').then(dates => {
+                if (dates.length > 0) {
+                    document.getElementById('commitDates').innerHTML = '所有提交日期:<br>' + dates.join('<br>');
+                } else {
+                    document.getElementById('commitDates').innerText = '无法获取提交日期';
+                }
+            });
+        });
+
+        async function fetchAllCommitDates(owner, repo) {
+            const url = `https://api.github.com/repos/${owner}/${repo}/commits`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data.map(commit => commit.commit.author.date);
+            } catch (error) {
+                console.error('Fetch error:', error);
+                return [];
+            }
+        }
+    </script>
+</body>
+</html>
