@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻页面</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="img/logo.png" alt="logo">
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="03-css.html">首页</a></li>
+                <li><a href="about.html" onclick="app.navigate(event, 'about')">关于</a></li>
+                <li><a href="news.html" onclick="app.navigate(event, 'news')">新闻</a></li>
+                <li><a href="contact.html" onclick="app.navigate(event, 'contact')">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h1>新闻页面</h1>
+        <div id="newsContent">
+            <!-- 新闻内容将在这里显示 -->
+        </div>
+    </main>
+
+    <script>
+        // 新闻类 - 定义新闻对象的结构
+        class News {
+            constructor(id, title, content, date, author) {
+                this.id = id;
+                this.title = title;
+                this.content = content;
+                this.date = date;
+                this.author = author;
+            }
+
+            // 格式化新闻显示
+            formatHTML() {
+                return `
+                    <article class="news-item">
+                        <h2>${this.title}</h2>
+                        <div class="news-meta">
+                            <span class="date">${this.date}</span>
+                            <span class="author">作者: ${this.author}</span>
+                        </div>
+                        <div class="news-content">${this.content}</div>
+                    </article>
+                `;
+            }
+        }
+
+        // 应用类 - 整合所有功能
+        class App {
+            constructor() {
+                this.newsList = [];
+                this.contentElement = document.getElementById('newsContent');
+                this.pageContent = {
+                    about: '<h2>关于我们</h2><p>这是一个演示网站，用于展示JavaScript类与对象的使用。</p>',
+                    contact: '<h2>联系我们</h2><p>邮箱: example@example.com<br>电话: 123-456-7890</p>'
+                };
+                
+                // 初始化示例数据
+                this.initSampleData();
+                this.displayNews();
+            }
+            
+            // 导航处理
+            navigate(event, pageName) {
+                event.preventDefault();
+                console.log(`您点击了${pageName}页面的链接`);
+                
+                if (pageName === 'news') {
+                    this.displayNews();
+                } else if (this.pageContent[pageName]) {
+                    this.contentElement.innerHTML = this.pageContent[pageName];
+                }
+            }
+            
+            // 添加新闻
+            addNews(news) {
+                this.newsList.push(news);
+            }
+            
+            // 显示所有新闻
+            displayNews() {
+                if (this.newsList.length === 0) {
+                    this.contentElement.innerHTML = '<p>暂无新闻</p>';
+                    return;
+                }
+
+                const newsHtml = this.newsList
+                    .map(news => news.formatHTML())
+                    .join('');
+                
+                this.contentElement.innerHTML = `<div class="news-container">${newsHtml}</div>`;
+            }
+            
+            // 初始化示例数据
+            initSampleData() {
+                const sampleNews = [
+                    new News(1, "网站改版上线", "我们的网站已经完成改版并成功上线，带来了全新的用户体验。", "2023-06-15", "张三"),
+                    new News(2, "新产品发布会", "我们将于下月举办新产品发布会，敬请期待。", "2023-06-20", "李四"),
+                    new News(3, "招聘信息", "我们正在招聘Web前端开发工程师，欢迎有才华的你加入我们的团队。", "2023-06-25", "王五")
+                ];
+                
+                sampleNews.forEach(news => this.addNews(news));
+            }
+        }
+
+        // 初始化应用
+        const app = new App();
+        
+        // 为了兼容性保留原函数，但重定向到新的方法
+        function handleNavClick(event, pageName) {
+            app.navigate(event, pageName);
+        }
+    </script>
+</body>
+</html>

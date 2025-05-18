@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 示例</title>
+    <style>
+        body {
+            background-color: green; /* 设置页面背景颜色为绿色 */
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        // 类和对象
+        class Bicycle {
+            constructor(make, type, year) {
+                this.make = make
+                this.type = type
+                this.year = year
+            }
+            ride() {
+                console.log(`自行车 ${this.make} ${this.type} 开始骑行`)
+            }
+            park() {
+                console.log(`自行车 ${this.make} ${this.type} 已停放`)
+            }
+        }
+        let myBicycle = new Bicycle('Giant', 'Mountain', 2023)
+        myBicycle.ride()
+        myBicycle.park()
+
+        class ElectricBicycle extends Bicycle {
+            constructor(make, type, year, batteryLife) {
+                super(make, type, year)
+                this.batteryLife = batteryLife
+            }
+            recharge() {
+                console.log(`电动自行车 ${this.make} ${this.type} 正在充电`)
+            }
+        }
+        let myElectricBicycle = new ElectricBicycle('Xiaomi', 'Road', 2023, 100)
+        myElectricBicycle.ride()
+        myElectricBicycle.recharge()
+
+        // 回调函数练习
+        console.log('开始')
+
+        setTimeout(function () {
+            console.log('处理中')
+        }, 1500)
+
+        console.log('结束')
+
+        // 新增按钮点击事件
+        function buttonClicked() {
+            alert('按钮被点击了！')
+        }
+    </script>
+</head>
+
+<body>
+    <h1 onclick="alert('标题被点击！')">示例</h1>
+    <div id="info">初始内容</div>
+    <button onclick="buttonClicked()">点击我</button> <!-- 新增按钮 -->
+</body>
+
+<script>
+    myElement = document.getElementById('info')
+    console.log(myElement)
+    myElement.innerHTML = '内容已更新'
+    myElement.onclick = function () {
+        alert('元素被点击！')
+    }
+</script>
+
+</html>
