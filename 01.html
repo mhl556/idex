@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动漫美图</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      nav {
+        background-color: #333;
+        padding: 10px;
+      }
+      nav a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      .carousel {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        margin-top: 20px;
+      }
+      .carousel img {
+        width: 100%;
+        transition: transform 0.5s ease;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+      }
+      form {
+        margin-top: 20px;
+      }
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="#home">首页</a>
+      <a href="#gallery">图库</a>
+      <a href="#contact">联系我们</a>
+    </nav>
+    <h1>本站致力于收集各类动漫美图并进行分享</h1>
+    <div class="carousel">
+      <img src="ff.jpg.jpg" alt="图片替代说明文字" />
+      <img src="jt.jpg.jpg" alt="图片替代说明文字" />
+      <img src="xt.webp" alt="图片替代说明文字" />
+      <img src="yt.webp" alt="图片替代说明文字" />
+    </div>
+    <div>
+      <p>
+        <a href="https://github.com/mhl556">仓库超链接地址</a>
+      </p>
+      <ol>
+        <li>欢迎来到我的网页</li>
+        <li>享受美</li>
+      </ol>
+      <table>
+        <tr>
+          <td>搜索图片</td>
+          <td>美化图片</td>
+          <td>图片清晰</td>
+        </tr>
+        <tr>
+          <td>抠图</td>
+          <td>图片剪辑</td>
+          <td>图片AI</td>
+        </tr>
+        <tr>
+          <td>美图分享</td>
+          <td>联系管理员</td>
+          <td>美图论坛</td>
+        </tr>
+      </table>
+      <form action="https://search.image.baidu.com/picture/subject_search">
+        <input type="text" name="search_text" placeholder="搜索图片" />
+        <input type="submit" value="搜索" />
+      </form>
+    </div>
+    <footer>
+      <p>© 2023 动漫美图. 保留所有权利.</p>
+      <p>联系我们: <i class="fas fa-envelope"></i> email@example.com</p>
+    </footer>
+  </body>
+</html>

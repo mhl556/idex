@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .content {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        // 变量和数据类型
+        let number = 42;
+        let text = "Hello, World!";
+        let isActive = false;
+
+        console.log(number, text, isActive);
+
+        // 条件语句
+        if (isActive) {
+            console.log("状态是活跃的");
+        } else {
+            console.log("状态是不活跃的");
+        }
+
+        // 循环示例
+        for (let i = 0; i < 5; i++) {
+            console.log(`循环计数: ${i}`);
+        }
+
+        // 函数定义
+        function greet(name) {
+            return `你好, ${name}!`;
+        }
+
+        let greeting = greet("Alice");
+        console.log(greeting);
+
+        // 数组和对象
+        let fruits = ["苹果", "香蕉", "橙子"];
+        let person = {
+            name: "Bob",
+            age: 30
+        };
+
+        console.log(fruits, person);
+
+        // 新增按钮点击事件
+        function showAlert() {
+            alert("按钮被点击了！");
+        }
+    </script>
+</head>
+
+<body>
+    <h1>JavaScript 新闻页面</h1>
+    <button onclick="showAlert()">点击我</button> <!-- 新增按钮 -->
+    <div class="content">
+        <p>这是一个示例内容区域，可以在这里展示更多信息。</p>
+    </div>
+</body>
+
+</html>

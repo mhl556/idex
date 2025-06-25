@@ -1,0 +1,41 @@
+{
+<<<<<<< HEAD
+  "name": "tailwind-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+=======
+  "name": "my-next-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && rm -rf docs && mv out docs",
+>>>>>>> 488fba82750d4b5f516424b11db4f3fcf03786e7
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+<<<<<<< HEAD
+    "next": "15.3.2"
+=======
+    "next": "15.3.1"
+>>>>>>> 488fba82750d4b5f516424b11db4f3fcf03786e7
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@tailwindcss/postcss": "^4",
+    "tailwindcss": "^4"
+  }
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> 488fba82750d4b5f516424b11db4f3fcf03786e7
