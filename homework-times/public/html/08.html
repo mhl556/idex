@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生信息表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        /* 自定义动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* 表格悬停效果 */
+        table tbody tr:hover {
+            background-color: #f9fafb;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto py-8">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">学生信息表</h2>
+        <table class="table-auto w-full bg-white shadow-md rounded-md overflow-hidden animate-fadeIn border border-gray-400">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-400">姓名</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-400">作业提交时间</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-400">作业时长</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-400">作业次数</th>
+                </tr>
+            </thead>
+            <tbody id="commitTbody"></tbody>
+        </table>
+    </div>
+    <script>
+        async function fetchWakaTimeDuration() {
+            console.log('开始请求WakaTime'); // 新增日志
+            const apiKey = 'waka_31a400eb-2167-4e20-b49f-7c3d57f7a0a4';
+            const url = 'https://wakatime.com/api/v1/users/current/summaries?range=last_7_days';
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': 'Basic ' + btoa(apiKey + ':')
+                    }
+                });
+                if (!response.ok) throw new Error(`HTTP错误 ${response.status}`);
+                const data = await response.json();
+                if (!Array.isArray(data.data)) {
+                    throw new Error('WakaTime返回数据格式异常');
+                }
+                const totalHours = data.data.reduce(
+                    (sum, day) => sum + (day.grand_total?.total_seconds || 0), 0
+                ) / 3600;
+                return `${totalHours.toFixed(2)} 小时`;
+            } catch (error) {
+                console.error('WakaTime请求失败:', error);
+                return '时长不可获取';
+            }
+        }
+
+        async function fetchCommits(owner, repo) {
+            const url = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=100`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                return data.map(commit => commit.commit.author.date.replace('T', ' ').replace('Z', ''));
+            } catch (error) {
+                console.error('Fetch error:', error);
+                return [];
+            }
+        }
+
+        async function fillTableData() {
+            const duration = await fetchWakaTimeDuration();
+            const commitTimes = await fetchCommits('mhl556', 'idex');
+            const count = commitTimes.length;
+            const tbody = document.getElementById('commitTbody');
+            tbody.innerHTML = '';
+            // 每个提交时间单独一行
+            commitTimes.forEach(time => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border border-gray-400">马海林</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border border-gray-400">${time}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border border-gray-400">${duration}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border border-gray-400">${count}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        window.onload = fillTableData;
+    </script>
+</body>
+</html>
+    

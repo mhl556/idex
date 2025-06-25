@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Greeting from '../components/Greeting'; // 调整导入路径
-import PracticeCard from '@/components/PracticeCard'; // 新增导入语句
 
 export default function Home() {
   return (
@@ -14,24 +12,6 @@ export default function Home() {
           height={38}
           priority
         />
-        
-        {/* 添加 Greeting 组件 */}
-        <div className="w-full text-center sm:text-left">
-          <Greeting name="访客" />
-          <Greeting name="开发者" />
-        </div>
-        
-        {/* 添加 HomePage 的内容 */}
-        <div className="w-full text-center sm:text-left">
-          <h1 className="text-3xl font-bold text-blue-700 mb-4">我的主页</h1>
-          <p className="text-gray-600 mb-8">欢迎来到我的 Next.js 应用。</p>
-          
-          {/* 使用 PracticeCard 组件 */}
-          <PracticeCard />
-          <PracticeCard />
-          <PracticeCard />
-        </div>
-
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
