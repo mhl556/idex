@@ -36,7 +36,7 @@
 - **实现流程**：`WakaTimeStats.js` 组件在加载时向 Cloudflare Worker 的 URL (`http://127.0.0.1:8787/`) 发送请求 -> Worker 收到请求后，使用预设的 API 密钥调用 WakaTime API -> Worker 将获取到的数据处理后返回给前端组件 -> 组件将数据显示为图表。
 
 ## 4. Next.js 项目结构
-
+通过对练习卡片进行双击互动，从而实现具体内容的展现。
 项目遵循 Next.js App Router 的标准目录结构：
 /
 ├── app/                    # App Router 的根目录
@@ -111,7 +111,7 @@
     在浏览器中打开 `http://localhost:3000` 即可查看项目。
 ## 7.运行截图
 
-### 每周练习进度页面
+### 每周练习进度页面（点击练习卡片可以跳转到具体代码）
 ![每周练习进度](picture/image1.png)
 *展示了各个练习项目的完成状态，包括.gitignore、01.html、010等文件的学习进度*
 
