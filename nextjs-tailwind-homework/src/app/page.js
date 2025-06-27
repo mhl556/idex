@@ -1,43 +1,50 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import PracticeCard from '@/app/components/PracticeCard';
 import WakaTimeStats from '@/app/components/WakaTimeStats';
 
 export default function HomePage() {
-  const weekOneTitle = "第一周：组件基础";
-  const practiceDate = new Date().toLocaleDateString();
+  const [practices, setPractices] = useState([]);
+  const [error, setError] = useState(null);
 
-  const practices = [
-    {
-      id: 1,
-      title: weekOneTitle,
-      description: "学习 React 组件的核心概念和 JSX 基础。",
-      date: practiceDate,
-      completed: true,
-    },
-    {
-      id: 2,
-      title: "第二周：Props 与 State",
-      description: "掌握组件间数据传递和内部状态管理。",
-      date: practiceDate,
-      completed: true,
-    },
-    {
-      id: 3,
-      title: "第三周：事件处理与列表渲染",
-      description: "让你的组件响应用户交互，并学习如何高效渲染列表数据。",
-      date: practiceDate,
-      completed: true,
-    },
-    {
-      id: 4,
-      title: "第四周：Tailwind CSS 集成",
-      description: "使用 Tailwind CSS 快速美化你的 Next.js 应用。",
-      date: practiceDate,
-      completed: true,
+  useEffect(() => {
+    async function fetchRepoContents() {
+      try {
+        const response = await fetch('https://api.github.com/repos/mhl556/idex/contents');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        
+        // 将 GitHub 仓库内容转换为练习卡片数据
+        const practiceItems = data.map((item, index) => ({
+          id: index + 1,
+          title: item.name,
+          description: `GitHub 仓库文件：${item.path}`,
+          date: new Date().toLocaleDateString(),
+          completed: item.type === 'file',
+          link: item.html_url
+        }));
+        
+        setPractices(practiceItems);
+      } catch (error) {
+        setError(error.message);
+      }
     }
-  ];
+
+    fetchRepoContents();
+  }, []);
+
+  if (error) {
+    return <div className="text-red-500 text-center p-4">加载失败: {error}</div>;
+  }
 
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
+      <div className="text-left mb-4">
+        <p className="text-sm text-slate-600">提示：页面底部为 WakaTime 统计时长</p>
+      </div>
       <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-8 text-center">
         每周练习进度
       </h1>
@@ -50,6 +57,7 @@ export default function HomePage() {
             description={practice.description}
             date={practice.date}
             completed={practice.completed}
+            link={practice.link}
           />
         ))}
       </div>
