@@ -5,7 +5,8 @@
 本项目是一个基于 Next.js 和 Tailwind CSS 构建的全栈 Web 应用，旨在展示和管理 Web 前端技术的学习与实践成果。项目集成了多项外部服务与 API，包括：
 
 - **GitHub API**：动态拉取并展示指定仓库（`mhl556/idex`）的文件和目录结构。
-- **QAnything 服务**：提供一个智能问答机器人界面，用户可以提出问题并获得解答，通过iframe使用html页面进行展示。
+- **QAnything 服务**：提供一个智能问答机器人界面，用户可以提出问题并获得解答
+- 。
 - **WakaTime API**：通过 Cloudflare Worker 中继，展示个人的编程活动统计数据。
 
 项目前端采用响应式设计，后端逻辑通过 Next.js API Routes 实现，整体体现了现代 Web 开发的“约定优于配置”原则。
